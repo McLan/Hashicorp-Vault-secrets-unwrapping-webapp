@@ -1,5 +1,0 @@
-export NODE_EXTRA_CA_CERTS="/home/fr.lactadom.ad/frext831/app/fullchain.pem"
-
-npm init
-npm install express
-npm install requests
