@@ -1,3 +1,6 @@
+git clone https://github.com/McLan/Hashicorp-Vault-secrets-unwrapping-webapp.git
+cd Hashicorp-Vault-secrets-unwrapping-webapp
+
 Installation 
 
 npm init
