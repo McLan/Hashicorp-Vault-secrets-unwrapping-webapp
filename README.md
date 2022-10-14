@@ -4,9 +4,12 @@ cd Hashicorp-Vault-secrets-unwrapping-webapp
 Installation 
 $ npm install
 
-Import vault certificate :
-$ export NODE_EXTRA_CA_CERTS="/home/$USER/fullchain.pem"
-
 Generate certificates :
+$ cd certs
 $ chmod +x certgen.sh
 $ ./certgen.sh <hostname>
+
+Browse on one of this urls accepting the certificate :
+https://127.0.0.1:3000
+https://<hostname>:3000
+https://<IP>:3000

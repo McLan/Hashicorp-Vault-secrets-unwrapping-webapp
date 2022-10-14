@@ -40,5 +40,5 @@ app.post("/", (req, res) => {
 
 var server = https.createServer(options, app);
 server.listen(3000, () => {
-    console.log("server starting on port : " + 3000)
+    console.log("server starting on port : " + 3000 + ". Browse on https://127.0.0.1:3000")
 });
