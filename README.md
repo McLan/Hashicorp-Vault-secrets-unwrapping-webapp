@@ -28,21 +28,20 @@ docker exec -it <ContainerID> ip a
 
 ## Modify container IP in server.js file at lign 27 :
 ```
-    var url = 'https://<IP>:8200/v1/sys/wrapping/unwrap';
+    var url = 'http://<IP>:8200/v1/sys/wrapping/unwrap';
 ```
 
 ## Wrap data with vault :
 ```
-curl -v -k --header "X-VAULT-TOKEN: myroot" -X POST --header "X-Vault-Wrap-TTL: 60m" --data '{"test":"password"}' http://<IP>:8200/v1/sys/wrapping/wrap
+curl -v -k --header "X-VAULT-TOKEN: myroot" -X POST --header "X-Vault-Wrap-TTL: 60m" --data '{"test":"password"}' http://172.17.0.2:8200/v1/sys/wrapping/wrap
 ```
 
-## run node app :
+## Run node app :
 ```
 node server.js
 ```
 
 ## Browse on one of this urls and enter your token :
-https://127.0.0.1:3000
-https://<hostname>:3000
-https://<IP>:3000
-
+* https://127.0.0.1:3000
+* https://<hostname>:3000
+* https://<IP>:3000

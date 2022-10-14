@@ -24,7 +24,7 @@ app.get("/", (req, res) => {
 
 app.post("/", (req, res) => {
     var myToken = req.body.token;
-    var url = 'https://<IP>:8200/v1/sys/wrapping/unwrap';
+    var url = 'http://<IP>:8200/v1/sys/wrapping/unwrap';
     var headers = {'X-Vault-Token': myToken};
     request({ headers: headers, url: url, method: "POST" },
     function (e,r, body) {
