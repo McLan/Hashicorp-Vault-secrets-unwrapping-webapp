@@ -17,18 +17,14 @@ chmod +x certgen.sh
 cd ..
 ```
 
-## Configure vault-nodeApp connection :
+## Run vault in container :
 ```
 docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' vault
-Retrieve Container ID with :
-docker ps
-Get vault container's IP address
-docker exec -it <ContainerID> ip a
+In another terminal, retrieve Container IP with :
 ```
-
-## Modify container IP in server.js file at lign 27 :
+## Open another terminal and change vault's IP address in servers.js :
 ```
-    var url = 'http://<IP>:8200/v1/sys/wrapping/unwrap';
+sed "s/<IP>/$(docker exec -it $(docker ps | grep "vault" | awk '{print $1}') ifconfig eth0 | grep "inet " | awk -F'[: ]+' '{ print $4 }')/g" server.js
 ```
 
 ## Wrap data with vault :
@@ -43,5 +39,7 @@ node server.js
 
 ## Browse on one of this urls and enter your token :
 * https://127.0.0.1:3000
-* https://<hostname>:3000
-* https://<IP>:3000
+* https://hostname:3000
+* https://IP:3000
+
+![result schema](./images/result.jpg)
