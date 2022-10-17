@@ -51,4 +51,4 @@ node server.js
 * https://hostname:3000
 * https://IP:3000
 
-![result schema](./images/result.jpg)
+![result schema](./images/result.png)
