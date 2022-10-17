@@ -9,7 +9,7 @@ docker run -d --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_D
 # Downloading everything
 ## Download
 ```
-git clone https://github.com/McLan/Hashicorp-Vault-secrets-unwrapping-webapp.git
+git clone https://github.com/McLan/secrets-unwrapping-webapp.git
 cd Hashicorp-Vault-secrets-unwrapping-webapp
 ```
 
