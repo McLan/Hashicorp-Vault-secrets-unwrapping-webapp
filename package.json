@@ -1,0 +1,15 @@
+{
+    "name": "hashicorp-vault-secrets-unwrapping-webapp",
+    "version": "1.0.0",
+    "description": "hashicorp secret web app",
+    "author": "Louis Lanard louislanardpro@gmail.com",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "request": "^2.88.2",
+      "body-parser": "^1.20.0"
+    }
+  }
