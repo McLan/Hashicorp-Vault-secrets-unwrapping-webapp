@@ -28,7 +28,8 @@ app.post("/", (req, res) => {
     var headers = {'X-Vault-Token': myToken};
     request({ headers: headers, url: url, method: "POST" },
     function (e,r, body) {
-        //console.log(body)
+        //Uncomment next line to debug
+        //console.log(e,r,body)
         var result = JSON.parse(body);
         if ('data' in result) {
             res.send(JSON.parse(body).data);
