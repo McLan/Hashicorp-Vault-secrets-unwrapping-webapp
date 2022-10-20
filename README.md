@@ -28,17 +28,26 @@ cd ..
 
 ## Run vault in container
 ```
-docker run --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' vault
+docker run -d --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' vault
 ```
-## Open another terminal and change vault's IP address in servers.js inside the container
+## change vault's IP address in servers.js
 ```
 sed "s/172.17.0.3/172.17.0.2/g" server.js
 ```
 
-## Wrap data with vault via API (or via UI at http://172.17.0.2:8200/ui/vault/tools/wrap)
+## Wrap data 
+### Via vault via API 
 ```
 curl -v -k --header "X-VAULT-TOKEN: myroot" -X POST --header "X-Vault-Wrap-TTL: 60m" --data '{"test":"password"}' http://172.17.0.2:8200/v1/sys/wrapping/wrap
 ```
+
+### Via Vault UI
+1. Browse on http://172.17.0.2:8200/
+2. Authenticate with the following token : myroot
+3. In tab *Tools > Wrap*, write data you want to wrap in JSON format and click *Wrap data*
+4. Copy your token
+![result schema](./images/WrapFromUI.png)
+![result schema](./images/getToken.png)
 
 ## Run node app 
 ```
@@ -50,4 +59,5 @@ node server.js
 * https://hostname:3000
 * https://IP:3000
 
+![result schema](./images/EnterToken.png)
 ![result schema](./images/result.png)
