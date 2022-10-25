@@ -80,5 +80,6 @@ To implement communication via HTTPS from the web app to vault, uncomment the 3 
 5. add the certificate chain in the /cert/ folder
 6. Create a new docker image and run it with :
 ```
-docker run -d -p 3000:3000 lanboy/unwrap-webapp
+docker build . -t <username>/unwrap-webapp
+docker run -d -p 3000:3000 <username>/unwrap-webapp
 ```
