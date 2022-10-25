@@ -4,6 +4,12 @@ const request = require('request');
 const fs = require('fs');
 var bodyParser = require('body-parser');
 
+//Uncomment these ligns to communicate in HTTPS with vault, and add the full CA certificates (intermediate until root) in the /certs/ folder when running the container (-v).
+//require('ssl-root-cas/latest')
+//    .inject()
+//    .addFile(__dirname + '/certs/fullCACertchain.crt');
+
+
 app = express();
 
 var key = fs.readFileSync(__dirname + '/certs/key.pem');
