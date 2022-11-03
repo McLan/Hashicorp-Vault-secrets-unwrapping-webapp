@@ -46,7 +46,7 @@ curl -v -k --header "X-VAULT-TOKEN: myroot" -X POST --header "X-Vault-Wrap-TTL: 
 2. Authenticate with the following token : myroot
 3. In tab *Tools > Wrap*, write data you want to wrap in JSON format and click *Wrap data*
 4. Copy your token
-![result schema](./images/WrapFromUI.png)
+![result schema](./images/WrapFromVault.png)
 ![result schema](./images/getToken.png)
 
 ## Run node app 
@@ -58,6 +58,8 @@ node server.js
 * https://127.0.0.1:3000
 * https://hostname:3000
 * https://IP:3000
+
+Or use the GET method by browsing on : https://127.0.0.1:3000?token=hvs.etc
 
 ![result schema](./images/EnterToken.png)
 ![result schema](./images/result.png)
