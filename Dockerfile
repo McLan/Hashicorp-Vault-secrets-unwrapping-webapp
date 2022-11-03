@@ -1,4 +1,5 @@
-FROM node:16
+FROM node:19.0.0-bullseye-slim
+ENV NODE_ENV=production
 
 # Create app directory
 WORKDIR /usr/src/app

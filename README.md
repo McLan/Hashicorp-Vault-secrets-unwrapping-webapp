@@ -38,15 +38,15 @@ sed "s/172.17.0.3/172.17.0.2/g" server.js
 ## Wrap data 
 ### Via vault via API 
 ```
-curl -v -k --header "X-VAULT-TOKEN: myroot" -X POST --header "X-Vault-Wrap-TTL: 60m" --data '{"test":"password"}' http://172.17.0.2:8200/v1/sys/wrapping/wrap
+curl -v -k --header "X-VAULT-TOKEN: myroot" -X POST --header "X-Vault-Wrap-TTL: 60m" --data '{"password":"test"}' http://172.17.0.2:8200/v1/sys/wrapping/wrap
 ```
 
 ### Via Vault UI
 1. Browse on http://172.17.0.2:8200/
 2. Authenticate with the following token : myroot
-3. In tab *Tools > Wrap*, write data you want to wrap in JSON format respecting the Key : password, as below.
+3. In tab *Tools > Wrap*, write data you want to wrap in JSON format respecting the Key : *password*, as below.
 {
-    "password": "your-hidden-password-here"
+    "password": "*your-hidden-password-here*"
 }
 4. Click *Wrap data*
 5. Copy your token
