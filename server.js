@@ -3,8 +3,15 @@ const https = require('https');
 const request = require('request');
 const fs = require('fs');
 var bodyParser = require('body-parser');
+const path = require("path");
+//Uncomment these ligns to communicate in HTTPS with vault, and add the full CA certificates (intermediate until root) in the /certs/ folder when running the container (-v).
+//require('ssl-root-cas/latest')
+//    .inject()
+//    .addFile(__dirname + '/certs/fullCACertchain.crt');
 
 app = express();
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "/public/html"));
 
 var key = fs.readFileSync(__dirname + '/certs/key.pem');
 var cert = fs.readFileSync(__dirname + '/certs/cert.pem');
@@ -19,24 +26,52 @@ app.use(express.static(__dirname));
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/index.html");
+    var myToken = req.query.token;
+    //check if token is null
+    if (myToken == '' || myToken == null ) {
+        res.sendFile(__dirname + "/public/html/getPassword.html");}
+    else {
+        var url = 'http://172.17.0.3:8200/v1/sys/wrapping/unwrap';
+        var headers = {'X-Vault-Token': myToken};
+        //send unwrapping POST request to Vault API
+        request({ headers: headers, url: url, method: "POST" },
+        function (e,r, body) {
+            //Uncomment next line to debug
+            //console.log(e,r,body)
+            var result = JSON.parse(body);
+	            if ('data' in result) {
+                 var pass = JSON.parse(body).data
+                 //console.log(pass);
+                 res.render("test", { message: pass.password });
+            } else {
+                 res.sendFile(__dirname + "/public/html/errors.html");}
+        });
+     }
 });
 
 app.post("/", (req, res) => {
     var myToken = req.body.token;
-    var url = 'http://172.17.0.3:8200/v1/sys/wrapping/unwrap';
-    var headers = {'X-Vault-Token': myToken};
-    request({ headers: headers, url: url, method: "POST" },
-    function (e,r, body) {
-        //Uncomment next line to debug
-        //console.log(e,r,body)
-        var result = JSON.parse(body);
-        if ('data' in result) {
-            res.send(JSON.parse(body).data);
-        } else {
-            res.send("<p>Le token n'est plus valide, un attaquant l'a peut-être intercepté.</p><p>Veuillez signaler cet incident de sécurité (à l'adresse securite@gmail.com) en spécifiant le compte de service associé.</p><p>The token is no longer valid, an attacker may have intercepted it.</p><p>Please report this security incident by specifying the service account at the following address: securite@gmail.com</p>")
-        }
-    });
+    //check if token is null
+    if (myToken == '' || myToken == null ) {
+        res.sendFile(__dirname + "/public/html/getPassword.html");}
+    else {
+        var url = 'http://172.17.0.3:8200/v1/sys/wrapping/unwrap';
+        var headers = {'X-Vault-Token': myToken};
+        //send unwrapping POST request to Vault API
+        request({ headers: headers, url: url, method: "POST" },
+        function (e,r, body) {
+            //Uncomment next line to debug
+            //console.log(e,r,body)
+            var result = JSON.parse(body);
+            if ('data' in result) {
+                 var pass = JSON.parse(body).data
+                //console.log(pass);
+                res.render("test", { message: pass.password});
+            }
+            else {
+                res.sendFile(__dirname + "/public/html/errors.html");}
+        });
+    }
 });
 
 var server = https.createServer(options, app);

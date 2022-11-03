@@ -1,15 +1,17 @@
 {
-    "name": "hashicorp-vault-secrets-unwrapping-webapp",
-    "version": "1.0.0",
-    "description": "hashicorp secret web app",
-    "author": "Louis Lanard louislanardpro@gmail.com",
-    "main": "server.js",
-    "scripts": {
-      "start": "node server.js"
-    },
-    "dependencies": {
-      "express": "^4.18.2",
-      "request": "^2.88.2",
-      "body-parser": "^1.20.0"
-    }
+  "name": "hashicorp-vault-secrets-unwrapping-webapp",
+  "version": "1.0.0",
+  "description": "hashicorp secret web app",
+  "author": "Louis Lanard louislanardpro@gmail.com",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.18.2",
+    "pug": "^3.0.2",
+    "request": "^2.88.2",
+    "ssl-root-cas": "^1.3.1"
   }
+}

@@ -1,10 +1,10 @@
 .box {
   border: 2px solid black;
   padding: 20px;
-  background-color: LightSteelBlue;
+  background-color: LightGrey;
   color: black;
   text-align: center;
-  font-family: sans-serif;
+  font-family: Montserrat;
   width: 900px;
   position: fixed;
   left: 50%;
@@ -13,11 +13,17 @@
   border-radius: 15px;
 }
 body{
-  background-color: floralwhite;
+  background-color: #17202A;
 }
-div{
+div.a{
   padding: 15px;
-  font-family: sans-serif;
+  font-size: 150%;
+  font-family: Montserrat;
+  font-weight: bold;
+  color: FireBrick; 
+}
+p{
+  font-weight: bold;
 }
 input{
   padding: 5px;
