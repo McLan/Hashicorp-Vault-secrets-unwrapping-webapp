@@ -9,6 +9,12 @@ const path = require("path");
 //    .inject()
 //    .addFile(__dirname + '/certs/fullCACertchain.crt');
 
+//Uncomment these ligns to communicate in HTTPS with vault, and add the full CA certificates (intermediate until root) in the /certs/ folder when running the container (-v).
+//require('ssl-root-cas/latest')
+//    .inject()
+//    .addFile(__dirname + '/certs/fullCACertchain.crt');
+
+
 app = express();
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "/public/html"));

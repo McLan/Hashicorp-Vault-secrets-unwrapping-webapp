@@ -2,7 +2,7 @@
 > run commands in this order because of docker's IP address
 ```
 docker pull lanboy/unwrap-webapp
-docker run -d lanboy/unwrap-webapp
+docker run -d -p 3000:3000 lanboy/unwrap-webapp
 docker run -d --cap-add=IPC_LOCK -e 'VAULT_DEV_ROOT_TOKEN_ID=myroot' -e 'VAULT_DEV_LISTEN_ADDRESS=0.0.0.0:8200' vault
 ```
 
@@ -61,3 +61,25 @@ node server.js
 
 ![result schema](./images/EnterToken.png)
 ![result schema](./images/result.png)
+
+
+
+## With HTTPS
+To implement communication via HTTPS from the web app to vault, uncomment the 3 ligns at the beginning of server.js, and add the root CA's certificate (or the full chain of CA's certificates, intermerdiary and root) in the /certs/ folder.
+```
+//require('ssl-root-cas/latest')
+//    .inject()
+//    .addFile(__dirname + '/certs/fullCACertchain.crt');
+```
+
+# HTTPS with docker
+1. Clone the repository 
+2. Run npm install inside the folder
+3. Generate certificates with certgen.sh
+4. Modify server.js (as in "With HTTPS" section above)
+5. add the certificate chain in the /cert/ folder
+6. Create a new docker image and run it with :
+```
+docker build . -t <username>/unwrap-webapp
+docker run -d -p 3000:3000 <username>/unwrap-webapp
+```
