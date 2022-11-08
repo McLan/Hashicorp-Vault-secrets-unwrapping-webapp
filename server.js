@@ -4,6 +4,7 @@ const request = require('request');
 const fs = require('fs');
 var bodyParser = require('body-parser');
 const path = require("path");
+
 //Uncomment these ligns to communicate in HTTPS with vault, and add the full CA certificates (intermediate until root) in the /certs/ folder when running the container (-v).
 //require('ssl-root-cas/latest')
 //    .inject()
@@ -21,7 +22,7 @@ var options = {
 };
 
 // server css as static
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + "/public/"));
 // get our app to use body parser
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -42,7 +43,7 @@ app.get("/", (req, res) => {
 	            if ('data' in result) {
                  var pass = JSON.parse(body).data
                  //console.log(pass);
-                 res.render("test", { message: pass.password });
+                 res.render("result", { message: pass.password });
             } else {
                  res.sendFile(__dirname + "/public/html/errors.html");}
         });
@@ -66,7 +67,7 @@ app.post("/", (req, res) => {
             if ('data' in result) {
                  var pass = JSON.parse(body).data
                 //console.log(pass);
-                res.render("test", { message: pass.password});
+                res.render("result", { message: pass.password});
             }
             else {
                 res.sendFile(__dirname + "/public/html/errors.html");}
